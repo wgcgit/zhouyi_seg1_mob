@@ -6,7 +6,17 @@
       "Bash(cat \"$\\(git -C \"D:/Software/ClaudeCodeProject/zhouyi_seg1_mob\" rev-parse --show-toplevel\\)/.superpowers/sdd/progress.md\")",
       "Bash(git config *)",
       "Bash(bash \"C:/Users/86134/.claude/plugins/cache/claude-plugins-official/superpowers/6.0.3/skills/subagent-driven-development/scripts/task-brief\" \"D:/Software/ClaudeCodeProject/zhouyi_seg1_mob/docs/superpowers/plans/2026-09-20-bazi-tuipan-mobile-implementation.md\" 1)",
-      "Bash(cp \"D:/Software/ClaudeCodeProject/zhouyi_seg1/frontend/shared/cities.js\" \"D:/Software/ClaudeCodeProject/zhouyi_seg1_mob/frontend/shared/cities.js\")"
+      "Bash(cp \"D:/Software/ClaudeCodeProject/zhouyi_seg1/frontend/shared/cities.js\" \"D:/Software/ClaudeCodeProject/zhouyi_seg1_mob/frontend/shared/cities.js\")",
+      "Bash(bash \"C:/Users/86134/.claude/plugins/cache/claude-plugins-official/superpowers/6.0.3/skills/subagent-driven-development/scripts/task-brief\" \"D:/Software/ClaudeCodeProject/zhouyi_seg1_mob/docs/superpowers/plans/2026-09-20-bazi-tuipan-mobile-implementation.md\" 2)",
+      "Bash(bash \"C:/Users/86134/.claude/plugins/cache/claude-plugins-official/superpowers/6.0.3/skills/subagent-driven-development/scripts/task-brief\" \"D:/Software/ClaudeCodeProject/zhouyi_seg1_mob/docs/superpowers/plans/2026-09-20-bazi-tuipan-mobile-implementation.md\" 3)",
+      "Bash(bash \"C:/Users/86134/.claude/plugins/cache/claude-plugins-official/superpowers/6.0.3/skills/subagent-driven-development/scripts/task-brief\" \"D:/Software/ClaudeCodeProject/zhouyi_seg1_mob/docs/superpowers/plans/2026-09-20-bazi-tuipan-mobile-implementation.md\" 4)",
+      "Bash(bash \"C:/Users/86134/.claude/plugins/cache/claude-plugins-official/superpowers/6.0.3/skills/subagent-driven-development/scripts/task-brief\" \"D:/Software/ClaudeCodeProject/zhouyi_seg1_mob/docs/superpowers/plans/2026-09-20-bazi-tuipan-mobile-implementation.md\" 5)",
+      "Bash(npm start *)",
+      "Bash(curl -s http://localhost:3000 -o /dev/null -w \"%{http_code}\")",
+      "Bash(curl -s -X POST http://localhost:3000/api/paipan -H \"Content-Type: application/json\" -d '{\"name\":\"李明\",\"gender\":\"男\",\"birthTime\":\"1990-01-15 10:30\",\"province\":\"北京市\",\"city\":\"东城区\",\"advanced\":false}')",
+      "Bash(curl -s http://localhost:3000/index.html -o /dev/null -w \"%{http_code}\")",
+      "Bash(curl -s http://localhost:3000/result.html -o /dev/null -w \"%{http_code}\")",
+      "Bash(curl -s http://localhost:3000/shared/cities.js -o /dev/null -w \"%{http_code}\")"
     ],
     "additionalDirectories": [
       "D:\\Software\\ClaudeCodeProject\\zhouyi_seg1_mob\\docs\\superpowers",
