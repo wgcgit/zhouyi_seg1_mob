@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+  <title>八字推盘信息录入 - 周易之易</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=beVietnamPro:wght@100..900&family=manrope:wght@100..900&family=sourceSerif4:wght@100..900&display=swap" rel="stylesheet"/>
+  <!-- Tailwind config and styles inline -->
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col">
+  <!-- TopNavBar -->
+  <nav class="fixed top-0 left-0 w-full z-50 bg-surface/90 backdrop-blur-md flex justify-center items-center h-14 border-b border-outline-variant/10">
+    <span class="font-headline-lg text-headline-lg text-primary tracking-tight">周易之易</span>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="flex-grow pt-14 pb-20 px-5">
+    <!-- Header -->
+    <div class="text-center py-6">
+      <h1 class="font-display-lg text-display-lg text-primary mb-2">开启您的命理探索</h1>
+      <p class="font-body-lg text-body-lg text-on-surface-variant">请输入您的基础出生信息，获取深度命盘解析</p>
+    </div>
+
+    <!-- Form Card -->
+    <div class="bg-surface-container-lowest rounded-xl p-5 shadow-sm">
+      <form id="paipan-form" class="flex flex-col gap-5">
+        <!-- 姓名输入 -->
+        <div class="flex flex-col gap-1.5">
+          <label class="font-title-md text-title-md text-primary flex items-center gap-1" for="name">
+            姓名 <span class="text-error">*</span>
+          </label>
+          <input class="w-full bg-white border-b-2 border-outline-variant/50 focus:border-primary focus:ring-0 px-4 py-3.5 rounded-t-lg text-body-md transition-colors placeholder:text-on-surface-variant/50"
+                 id="name" maxlength="10" name="name" placeholder="请输入汉字姓名（最多10字）" type="text" value="李明"/>
+        </div>
+
+        <!-- 性别选择 -->
+        <div class="flex flex-col gap-1.5">
+          <label class="font-title-md text-title-md text-primary">性别 <span class="text-error">*</span></label>
+          <div class="flex bg-surface-container-low rounded-lg p-1 w-full max-w-[160px]">
+            <input type="radio" id="gender-male" name="gender" value="男" class="hidden peer/male" checked=""/>
+            <label for="gender-male" class="flex-1 py-2.5 text-center rounded-lg cursor-pointer font-label-sm text-label-sm font-bold transition-all peer-checked/male:bg-white peer-checked/male:text-primary peer-checked/male:shadow-sm hover:text-primary">男</label>
+            <input type="radio" id="gender-female" name="gender" value="女" class="hidden peer/female"/>
+            <label for="gender-female" class="flex-1 py-2.5 text-center rounded-lg cursor-pointer font-label-sm text-label-sm transition-all peer-checked/female:bg-white peer-checked/female:text-primary hover:text-primary">女</label>
+          </div>
+        </div>
+
+        <!-- 出生时间 -->
+        <div class="flex flex-col gap-1.5">
+          <label class="font-title-md text-title-md text-primary">出生时间 <span class="text-error">*</span></label>
+          <div class="grid grid-cols-2 gap-3">
+            <input class="w-full bg-white border-b-2 border-outline-variant/50 focus:border-primary focus:ring-0 px-4 py-3.5 rounded-t-lg text-body-md transition-colors appearance-none"
+                   id="birth_date" name="birth_date" type="date"/>
+            <input class="w-full bg-white border-b-2 border-outline-variant/50 focus:border-primary focus:ring-0 px-4 py-3.5 rounded-t-lg text-body-md transition-colors appearance-none"
+                   id="birth_time" name="birth_time" type="time"/>
+          </div>
+          <p class="font-label-sm text-label-sm text-on-surface-variant/70 flex items-center gap-1">
+            <span class="material-symbols-outlined text-[16px]">info</span> 若无精准分钟，可选择00分
+          </p>
+        </div>
+
+        <!-- 出生地点 -->
+        <div class="flex flex-col gap-1.5">
+          <label class="font-title-md text-title-md text-primary">出生地点 <span class="text-error">*</span></label>
+          <div class="grid grid-cols-2 gap-3">
+            <select id="province" class="w-full bg-white border-b-2 border-outline-variant/50 focus:border-primary focus:ring-0 px-4 py-3.5 rounded-t-lg text-body-md transition-colors appearance-none" name="province">
+              <option disabled="" selected="" value="">请选择省份</option>
+            </select>
+            <select id="city" class="w-full bg-white border-b-2 border-outline-variant/50 focus:border-primary focus:ring-0 px-4 py-3.5 rounded-t-lg text-body-md transition-colors appearance-none" name="city" disabled>
+              <option disabled="" selected="" value="">请选择城市</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- 高级分析开关 -->
+        <div class="flex items-center justify-between py-3 px-1 border-t border-outline-variant/10">
+          <div class="flex flex-col">
+            <span class="font-title-md text-title-md text-on-surface">高级分析</span>
+            <span class="font-label-sm text-label-sm text-on-surface-variant">包含更详细的命理推演解读</span>
+          </div>
+          <label class="relative inline-flex items-center cursor-pointer">
+            <input type="checkbox" id="advanced-mode" class="sr-only peer">
+            <div class="w-11 h-6 bg-outline-variant/30 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+          </label>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <!-- Fixed Submit Button -->
+  <div class="fixed bottom-0 left-0 right-0 p-4 bg-surface/95 backdrop-blur-md border-t border-outline-variant/10">
+    <button id="submit-btn" class="w-full bg-primary-container text-on-primary disabled:opacity-60 disabled:cursor-not-allowed hover:disabled:bg-primary-container py-4 rounded-xl font-title-md text-title-md font-bold shadow-md shadow-primary-container/20 flex items-center justify-center gap-2" type="submit" form="paipan-form">
+      <span id="btn-text">开始排盘</span>
+      <span class="material-symbols-outlined" id="btn-icon">arrow_forward</span>
+    </button>
+  </div>
+
+  <script src="shared/cities.js"></script>
+  <script>
+    // Tailwind config
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            surface: "#fff8f5",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-low": "#fbf2ed",
+            "surface-container": "#f5ece7",
+            "on-surface": "#1e1b18",
+            "on-surface-variant": "#4d453c",
+            "primary": "#715b3e",
+            "primary-container": "#8b7355",
+            "on-primary": "#ffffff",
+            "on-primary-container": "#0a0400",
+            "outline-variant": "#d1c4b9",
+            error: "#ba1a1a",
+            "on-error": "#ffffff"
+          },
+          fontFamily: {
+            "body-md": ["manrope"],
+            "title-md": ["manrope"],
+            "label-sm": ["beVietnamPro"],
+            "display-lg": ["sourceSerif4"],
+            "headline-lg": ["sourceSerif4"]
+          },
+          fontSize: {
+            "body-md": ["16px", { lineHeight: "1.7", fontWeight: "400" }],
+            "body-lg": ["18px", { lineHeight: "1.8", fontWeight: "400" }],
+            "title-md": ["20px", { lineHeight: "1.5", fontWeight: "600" }],
+            "label-sm": ["13px", { lineHeight: "1.4", letterSpacing: "0.05em", fontWeight: "500" }],
+            "display-lg": ["32px", { lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "600" }],
+            "headline-lg": ["24px", { lineHeight: "1.3", fontWeight: "600" }]
+          }
+        }
+      }
+    };
+
+    // Set default date and time
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('birth_date').value = '1990-01-15';
+      document.getElementById('birth_time').value = '10:30';
+
+      // Populate provinces
+      const provinceSelect = document.getElementById('province');
+      for (const province in citiesData) {
+        const opt = document.createElement('option');
+        opt.value = province;
+        opt.textContent = province;
+        provinceSelect.appendChild(opt);
+      }
+
+      // Province-city linkage
+      const citySelect = document.getElementById('city');
+      provinceSelect.addEventListener('change', () => {
+        const cities = citiesData[provinceSelect.value] || [];
+        citySelect.innerHTML = '<option value="">请选择城市</option>';
+        cities.forEach(city => {
+          const opt = document.createElement('option');
+          opt.value = city;
+          opt.textContent = city;
+          citySelect.appendChild(opt);
+        });
+        citySelect.disabled = !cities.length;
+      });
+
+      // Default: 北京市 -> 东城区
+      provinceSelect.value = '北京市';
+      provinceSelect.dispatchEvent(new Event('change'));
+      citySelect.value = '东城区';
+    });
+
+    // Form submission
+    const form = document.getElementById('paipan-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const btnText = document.getElementById('btn-text');
+    const btnIcon = document.getElementById('btn-icon');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const gender = document.querySelector('input[name="gender"]:checked')?.value;
+      const birthDate = document.getElementById('birth_date').value;
+      const birthTime = document.getElementById('birth_time').value;
+      const province = document.getElementById('province').value;
+      const city = document.getElementById('city').value;
+
+      if (!name || !gender || !birthDate || !birthTime || !province || !city) {
+        alert('请填写完整信息');
+        return;
+      }
+
+      submitBtn.disabled = true;
+      btnText.textContent = '正在生成排盘，请稍后';
+      btnIcon.style.display = 'none';
+
+      try {
+        const response = await fetch('/api/paipan', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name,
+            gender,
+            birthTime: `${birthDate} ${birthTime}`,
+            province,
+            city,
+            advanced: document.getElementById('advanced-mode').checked
+          })
+        });
+
+        const result = await response.json();
+
+        if (!result.success) {
+          alert('生成失败：' + result.error);
+          submitBtn.disabled = false;
+          btnText.textContent = '开始排盘';
+          btnIcon.style.display = 'inline';
+          return;
+        }
+
+        sessionStorage.setItem('paipanResult', JSON.stringify(result.data));
+        window.location.href = 'result.html';
+
+      } catch (err) {
+        alert('网络错误：' + err.message);
+        submitBtn.disabled = false;
+        btnText.textContent = '开始排盘';
+        btnIcon.style.display = 'inline';
+      }
+    });
+  </script>
+</body>
+</html>
