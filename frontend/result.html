@@ -623,8 +623,14 @@
           if (wangshuai.得势) html += `<div class="bg-surface-container-low p-3 rounded-lg border-l-2 border-amber-500"><div class="font-label-sm text-label-sm text-amber-600 mb-1">得势</div><p class="font-body-md text-body-md text-on-surface-variant text-xs">${wangshuai.得势}</p></div>`;
           html += '</div></div>';
         }
-        if (mod3.格局定性) {
-          html += `<div class="bg-surface-container-low p-3 rounded-lg"><span class="font-label-sm text-label-sm text-on-surface-variant">格局定性：</span><span class="font-body-md text-body-md text-on-surface font-medium text-sm">${mod3.格局定性}</span></div>`;
+        if (mod3.格局定性 || mod3.综合定论 || mod3.格局成败 || mod3.破格点 || mod3.通关救应) {
+          html += '<div class="flex flex-wrap gap-2 mb-2">';
+          if (mod3.格局定性) html += `<div class="bg-surface-container-low px-3 py-1.5 rounded-lg"><span class="font-label-sm text-label-sm text-on-surface-variant">格局定性：</span><span class="font-body-md text-body-md text-on-surface font-medium text-xs">${mod3.格局定性}</span></div>`;
+          if (mod3.综合定论) html += `<div class="bg-surface-container-low px-3 py-1.5 rounded-lg"><span class="font-label-sm text-label-sm text-on-surface-variant">综合定论：</span><span class="font-body-md text-body-md text-on-surface font-medium text-xs">${mod3.综合定论}</span></div>`;
+          if (mod3.格局成败) html += `<div class="bg-surface-container-low px-3 py-1.5 rounded-lg"><span class="font-label-sm text-label-sm text-on-surface-variant">格局成败：</span><span class="font-body-md text-body-md text-on-surface font-medium text-xs">${mod3.格局成败}</span></div>`;
+          if (mod3.破格点 && mod3.破格点 !== '无') html += `<div class="bg-surface-container-low px-3 py-1.5 rounded-lg"><span class="font-label-sm text-label-sm text-on-surface-variant">破格点：</span><span class="font-body-md text-body-md text-red-600 font-medium text-xs">${mod3.破格点}</span></div>`;
+          if (mod3.通关救应 && mod3.通关救应 !== '无') html += `<div class="bg-surface-container-low px-3 py-1.5 rounded-lg"><span class="font-label-sm text-label-sm text-on-surface-variant">通关救应：</span><span class="font-body-md text-body-md text-emerald-600 font-medium text-xs">${mod3.通关救应}</span></div>`;
+          html += '</div>';
         }
         wangshuaiContainer.innerHTML = html || '<p class="text-on-surface-variant text-sm">暂无数据</p>';
       }
@@ -633,12 +639,24 @@
       if (yongshenContainer) {
         const yongshenData = mod3.喜忌用神 || {};
         const firstGod = yongshenData.第一用神 || '';
+        const secondGod = yongshenData.第二用神 || '';
         const avoidGod = yongshenData.忌神 || '';
+        const secondAvoid = yongshenData.次忌神 || '';
         const logic = yongshenData.取用逻辑 || '';
 
         let html = '<div class="flex flex-col gap-3">';
-        if (firstGod) html += `<div class="bg-surface-container-low p-3 rounded-lg border-l-2 border-emerald-500"><div class="flex items-center gap-2 mb-1"><span class="material-symbols-outlined text-emerald-600 text-sm">check_circle</span><h4 class="font-label-sm text-label-sm text-emerald-600">用神</h4></div><span class="tag tag-green text-sm">${firstGod}</span></div>`;
-        if (avoidGod) html += `<div class="bg-surface-container-low p-3 rounded-lg border-l-2 border-red-500"><div class="flex items-center gap-2 mb-1"><span class="material-symbols-outlined text-red-600 text-sm">cancel</span><h4 class="font-label-sm text-label-sm text-red-600">忌神</h4></div><span class="tag tag-red text-sm">${avoidGod}</span></div>`;
+        if (firstGod || secondGod) {
+          html += `<div class="bg-surface-container-low p-3 rounded-lg border-l-2 border-emerald-500"><div class="flex items-center gap-2 mb-1"><span class="material-symbols-outlined text-emerald-600 text-sm">check_circle</span><h4 class="font-label-sm text-label-sm text-emerald-600">用神</h4></div>`;
+          if (firstGod) html += `<div class="mb-1"><span class="font-label-sm text-label-sm text-on-surface-variant">第一用神：</span><span class="tag tag-green text-xs ml-1">${firstGod}</span></div>`;
+          if (secondGod) html += `<div><span class="font-label-sm text-label-sm text-on-surface-variant">第二用神：</span><span class="tag tag-green text-xs ml-1">${secondGod}</span></div>`;
+          html += '</div>';
+        }
+        if (avoidGod || secondAvoid) {
+          html += `<div class="bg-surface-container-low p-3 rounded-lg border-l-2 border-red-500"><div class="flex items-center gap-2 mb-1"><span class="material-symbols-outlined text-red-600 text-sm">cancel</span><h4 class="font-label-sm text-label-sm text-red-600">忌神</h4></div>`;
+          if (avoidGod) html += `<div class="mb-1"><span class="font-label-sm text-label-sm text-on-surface-variant">忌神：</span><span class="tag tag-red text-xs ml-1">${avoidGod}</span></div>`;
+          if (secondAvoid) html += `<div><span class="font-label-sm text-label-sm text-on-surface-variant">次忌神：</span><span class="tag tag-red text-xs ml-1">${secondAvoid}</span></div>`;
+          html += '</div>';
+        }
         if (logic) html += `<div class="bg-surface-container-low p-3 rounded-lg border-l-2 border-primary"><h4 class="font-label-sm text-label-sm text-primary mb-1">取用逻辑</h4><p class="font-body-md text-body-md text-on-surface-variant text-xs">${logic}</p></div>`;
         html += '</div>';
         yongshenContainer.innerHTML = html || '<p class="text-on-surface-variant text-sm">暂无数据</p>';
@@ -680,6 +698,25 @@
       if (mod5.性格优点) html += `<div class="flex gap-3 bg-surface-container-low p-3 rounded-lg"><span class="material-symbols-outlined text-emerald-600">thumb_up</span><div><strong class="block mb-1 text-emerald-600 text-sm">性格优点</strong><p class="text-on-surface-variant text-xs">${mod5.性格优点}</p></div></div>`;
       if (mod5.性格短板) html += `<div class="flex gap-3 bg-surface-container-low p-3 rounded-lg mt-2"><span class="material-symbols-outlined text-red-600">thumb_down</span><div><strong class="block mb-1 text-red-600 text-sm">性格短板</strong><p class="text-on-surface-variant text-xs">${mod5.性格短板}</p></div></div>`;
       if (mod5.核心心性痛点) html += `<div class="flex gap-3 bg-surface-container-low p-3 rounded-lg mt-2"><span class="material-symbols-outlined text-blue-600">warning</span><div><strong class="block mb-1 text-blue-600 text-sm">核心心性痛点</strong><p class="text-on-surface-variant text-xs">${mod5.核心心性痛点}</p></div></div>`;
+
+      // 详细解读
+      const detail = mod5.详细解读 || {};
+      const detailItems = [
+        { key: '日主本性', label: '日主本性' },
+        { key: '十神组合心性', label: '十神组合心性' },
+        { key: '五行旺衰心性', label: '五行旺衰心性' },
+        { key: '刑冲合害心性', label: '刑冲合害心性' }
+      ];
+      let hasDetail = false;
+      let detailHtml = '<div class="mt-3 pt-3 border-t border-outline-variant/20">';
+      detailItems.forEach(item => {
+        if (detail[item.key]) {
+          hasDetail = true;
+          detailHtml += `<div class="flex gap-3 bg-surface-container-low p-3 rounded-lg mt-2"><span class="material-symbols-outlined text-primary shrink-0">article</span><div><strong class="block mb-1 text-secondary text-sm">${item.label}</strong><p class="text-on-surface-variant text-xs">${detail[item.key]}</p></div></div>`;
+        }
+      });
+      detailHtml += '</div>';
+      if (hasDetail) html += detailHtml;
 
       container.innerHTML = html || '<p class="text-on-surface-variant text-sm">暂无数据</p>';
     }
