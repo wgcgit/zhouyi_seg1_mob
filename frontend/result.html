@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+  <title>命盘解析结果 - 周易之易</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=beVietnamPro:wght@100..900&family=manrope:wght@100..900&family=sourceSerif4:wght@100..900&display=swap" rel="stylesheet"/>
+</head>
+<body class="antialiased min-h-screen flex flex-col font-body-md text-body-md bg-surface">
+  <!-- TopNavBar -->
+  <header class="fixed top-0 left-0 w-full z-50 bg-surface/90 backdrop-blur-md flex justify-center items-center h-14 border-b border-outline-variant/10">
+    <a class="font-headline-lg text-headline-lg text-primary tracking-tight" href="index.html">周易之易</a>
+  </header>
+
+  <!-- Top Tab Navigation -->
+  <nav class="fixed top-14 left-0 w-full z-40 bg-surface border-b border-outline-variant/10 overflow-x-auto no-scrollbar">
+    <div class="flex min-w-max px-2">
+      <button class="tab-btn flex-shrink-0 px-4 py-3 font-label-sm text-label-sm text-primary font-bold border-b-2 border-primary" data-tab="1">
+        命盘解析
+      </button>
+      <button class="tab-btn flex-shrink-0 px-4 py-3 font-label-sm text-label-sm text-on-surface-variant border-b-2 border-transparent hover:text-primary" data-tab="2">
+        旺衰用神
+      </button>
+      <button class="tab-btn flex-shrink-0 px-4 py-3 font-label-sm text-label-sm text-on-surface-variant border-b-2 border-transparent hover:text-primary" data-tab="3">
+        性格运势
+      </button>
+      <button class="tab-btn flex-shrink-0 px-4 py-3 font-label-sm text-label-sm text-on-surface-variant border-b-2 border-transparent hover:text-primary" data-tab="4">
+        六亲婚恋
+      </button>
+      <button class="tab-btn flex-shrink-0 px-4 py-3 font-label-sm text-label-sm text-on-surface-variant border-b-2 border-transparent hover:text-primary" data-tab="5">
+        健康总结
+      </button>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="flex-1 pt-28 pb-6 px-5 flex flex-col gap-5">
+    <!-- User Info Section -->
+    <section class="flex flex-col items-center gap-3 py-4 border-b border-primary/10">
+      <div class="w-16 h-16 rounded-full bg-surface-container-highest flex items-center justify-center border border-outline-variant/30">
+        <span class="material-symbols-outlined text-3xl text-on-surface-variant">person</span>
+      </div>
+      <h2 class="font-title-md text-title-md text-on-surface" id="sidebar-name">李明</h2>
+      <p class="font-label-sm text-label-sm text-on-surface-variant" id="sidebar-pillar">乾造：庚午 己丑 癸巳 乙卯</p>
+    </section>
+
+    <!-- Four Pillars Vertical Display -->
+    <section class="bg-surface-container-lowest rounded-xl overflow-hidden border border-secondary/20">
+      <div id="four-pillars-container" class="divide-y divide-outline-variant/20">
+        <!-- Dynamic content: 4 rows for 年柱/月柱/日柱/时柱 -->
+      </div>
+    </section>
+
+    <!-- Summary Card -->
+    <section class="bg-surface-container-lowest rounded-xl p-5 border border-secondary/20">
+      <h2 class="font-title-md text-title-md text-on-surface mb-3 flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary">insights</span> 全局定性
+      </h2>
+      <p id="pattern-summary" class="font-body-md text-body-md text-on-surface-variant mb-4 leading-relaxed">--</p>
+      <div class="flex flex-wrap gap-3 pt-3 border-t border-primary/10">
+        <div class="flex items-center gap-2 bg-surface-container-low px-3 py-1.5 rounded-full">
+          <span class="font-label-sm text-label-sm text-on-surface-variant">用神：</span>
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/60 border border-emerald-700/30"></span>
+          <span id="yongshen-list" class="font-body-md text-body-md text-on-surface"></span>
+        </div>
+        <div class="flex items-center gap-2 bg-surface-container-low px-3 py-1.5 rounded-full">
+          <span class="font-label-sm text-label-sm text-on-surface-variant">忌神：</span>
+          <span class="w-2.5 h-2.5 rounded-full bg-orange-500/60 border border-orange-700/30"></span>
+          <span id="jishen-list" class="font-body-md text-body-md text-on-surface"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 1 Content: 命盘解析 -->
+    <div id="tab-1" class="tab-content flex flex-col gap-4">
+      <!-- 四柱十神 & 原局关键组合 -->
+      <div class="card">
+        <div class="card-header" onclick="toggleCard(this)">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary">dataset_linked</span>
+            <h3 class="font-title-md text-title-md text-on-surface">四柱十神 & 原局关键组合</h3>
+          </div>
+          <span class="material-symbols-outlined text-on-surface-variant card-icon">expand_more</span>
+        </div>
+        <div class="card-content">
+          <div id="module1-content" class="flex flex-col gap-4 mt-2">
+            <!-- Dynamic content -->
+          </div>
+        </div>
+      </div>
+      <!-- 地支刑冲合害 -->
+      <div class="card">
+        <div class="card-header" onclick="toggleCard(this)">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary">timeline</span>
+            <h3 class="font-title-md text-title-md text-on-surface">地支刑冲合害拆解</h3>
+          </div>
+          <span class="material-symbols-outlined text-on-surface-variant card-icon">expand_more</span>
+        </div>
+        <div class="card-content">
+          <div id="module2-content" class="flex flex-col gap-4 mt-2">
+            <!-- Dynamic content -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 2 Content: 旺衰用神 -->
+    <div id="tab-2" class="tab-content flex flex-col gap-4" style="display:none;">
+      <!-- 日主旺衰综合判断 -->
+      <div class="card">
+        <div class="card-header" onclick="toggleCard(this)">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary">troubleshoot</span>
+            <h3 class="font-title-md text-title-md text-on-surface">日主旺衰综合判断</h3>
+          </div>
+          <span class="material-symbols-outlined text-on-surface-variant card-icon">expand_more</span>
+        </div>
+        <div class="card-content">
+          <div id="module3-wangshuai" class="flex flex-col gap-4">
+            <!-- Dynamic content -->
+          </div>
+        </div>
+      </div>
+      <!-- 用神忌神解析 -->
+      <div class="card">
+        <div class="card-header" onclick="toggleCard(this)">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary">insights</span>
+            <h3 class="font-title-md text-title-md text-on-surface">用神忌神解析</h3>
+          </div>
+          <span class="material-symbols-outlined text-on-surface-variant card-icon">expand_more</span>
+        </div>
+        <div class="card-content">
+          <div id="module3-yongshen" class="flex flex-col gap-4">
+            <!-- Dynamic content -->
+          </div>
+        </div>
+      </div>
+      <!-- 十二长生 -->
+      <div class="card">
+        <div class="card-header" onclick="toggleCard(this)">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary">vital_signs</span>
+            <h3 class="font-title-md text-title-md text-on-surface">十二长生旺衰全解</h3>
+          </div>
+          <span class="material-symbols-outlined text-on-surface-variant card-icon">expand_more</span>
+        </div>
+        <div class="card-content">
+          <div id="module4-content" class="flex flex-col gap-4">
+            <!-- Dynamic content -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 3 Content: 性格与人生运势 -->
+    <div id="tab-3" class="tab-content flex flex-col gap-4" style="display:none;">
+      <!-- 性格心性全面解读 -->
+      <div class="card">
+        <div class="card-header" onclick="toggleCard(this)">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary">psychology</span>
+            <h3 class="font-title-md text-title-md text-on-surface">性格心性全面解读</h3>
+          </div>
+          <span class="material-symbols-outlined text-on-surface-variant card-icon">expand_more</span>
+        </div>
+        <div class="card-content">
+          <div id="module5-content" class="flex flex-col gap-4">
+            <!-- Dynamic content -->
+          </div>
+        </div>
+      </div>
+      <!-- 事业财运详解 -->
+      <div class="card">
+        <div class="card-header" onclick="toggleCard(this)">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary">monetization_on</span>
+            <h3 class="font-title-md text-title-md text-on-surface">事业财运详解</h3>
+          </div>
+          <span class="material-symbols-outlined text-on-surface-variant card-icon">expand_more</span>
+        </div>
+        <div class="card-content">
+          <div id="module6-caiyun" class="flex flex-col gap-4">
+            <!-- Dynamic content -->
+          </div>
+        </div>
+      </div>
+      <!-- 大运走势 -->
+      <div class="card">
+        <div class="card-header" onclick="toggleCard(this)">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary">trending_up</span>
+            <h3 class="font-title-md text-title-md text-on-surface">大运走势逻辑</h3>
+          </div>
+          <span class="material-symbols-outlined text-on-surface-variant card-icon">expand_more</span>
+        </div>
+        <div class="card-content">
+          <div id="module9-content" class="flex flex-col gap-4">
+            <!-- Dynamic content -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 4 Content: 六亲与婚恋子女 -->
+    <div id="tab-4" class="tab-content flex flex-col gap-4" style="display:none;">
+      <!-- 婚姻家庭 -->
+      <div class="card">
+        <div class="card-header" onclick="toggleCard(this)">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary">favorite</span>
+            <h3 class="font-title-md text-title-md text-on-surface">婚姻家庭解读</h3>
+          </div>
+          <span class="material-symbols-outlined text-on-surface-variant card-icon">expand_more</span>
+        </div>
+        <div class="card-content">
+          <div id="module7-content" class="flex flex-col gap-4">
+            <!-- Dynamic content -->
+          </div>
+        </div>
+      </div>
+      <!-- 父母关系 -->
+      <div class="card">
+        <div class="card-header" onclick="toggleCard(this)">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary">escalator_warning</span>
+            <h3 class="font-title-md text-title-md text-on-surface">父母关系分析</h3>
+          </div>
+          <span class="material-symbols-outlined text-on-surface-variant card-icon">expand_more</span>
+        </div>
+        <div class="card-content">
+          <div id="module11-content" class="flex flex-col gap-4">
+            <!-- Dynamic content -->
+          </div>
+        </div>
+      </div>
+      <!-- 子女关系 -->
+      <div class="card">
+        <div class="card-header" onclick="toggleCard(this)">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary">child_care</span>
+            <h3 class="font-title-md text-title-md text-on-surface">子女关系分析</h3>
+          </div>
+          <span class="material-symbols-outlined text-on-surface-variant card-icon">expand_more</span>
+        </div>
+        <div class="card-content">
+          <div id="module12-content" class="flex flex-col gap-4">
+            <!-- Dynamic content -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 5 Content: 健康与全局总结 -->
+    <div id="tab-5" class="tab-content flex flex-col gap-4" style="display:none;">
+      <!-- 健康提示 -->
+      <div class="card">
+        <div class="card-header" onclick="toggleCard(this)">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary">monitor_heart</span>
+            <h3 class="font-title-md text-title-md text-on-surface">身体健康重点提示</h3>
+          </div>
+          <span class="material-symbols-outlined text-on-surface-variant card-icon">expand_more</span>
+        </div>
+        <div class="card-content">
+          <div id="module8-content" class="flex flex-col gap-4">
+            <!-- Dynamic content -->
+          </div>
+        </div>
+      </div>
+      <!-- 命局格局 -->
+      <div class="card">
+        <div class="card-header" onclick="toggleCard(this)">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary">auto_awesome</span>
+            <h3 class="font-title-md text-title-md text-on-surface">命局格局深度解析</h3>
+          </div>
+          <span class="material-symbols-outlined text-on-surface-variant card-icon">expand_more</span>
+        </div>
+        <div class="card-content">
+          <div id="module13-content" class="flex flex-col gap-4">
+            <!-- Dynamic content -->
+          </div>
+        </div>
+      </div>
+      <!-- 全局总结 -->
+      <div class="card">
+        <div class="card-header" onclick="toggleCard(this)">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary">lightbulb</span>
+            <h3 class="font-title-md text-title-md text-on-surface">全局总结 & 现实建议</h3>
+          </div>
+          <span class="material-symbols-outlined text-on-surface-variant card-icon">expand_more</span>
+        </div>
+        <div class="card-content">
+          <div id="module10-content" class="flex flex-col gap-4">
+            <!-- Dynamic content -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <style>
+    /* Tailwind config inline - same as index.html */
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            surface: "#fff8f5",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-low": "#fbf2ed",
+            "surface-container-high": "#efe6e2",
+            "surface-container-highest": "#e9e1dc",
+            "on-surface": "#1e1b18",
+            "on-surface-variant": "#4d453c",
+            "primary": "#715b3e",
+            "primary-container": "#8b7355",
+            "on-primary": "#ffffff",
+            "on-primary-container": "#0a0400",
+            "secondary": "#725a3d",
+            "secondary-container": "#fbdab5",
+            "on-secondary-container": "#765f41",
+            "outline-variant": "#d1c4b9",
+            error: "#ba1a1a",
+            "on-error": "#ffffff",
+            "error-container": "#ffdad6",
+            "on-error-container": "#93000a"
+          },
+          fontFamily: {
+            "body-md": ["manrope"],
+            "title-md": ["manrope"],
+            "label-sm": ["beVietnamPro"],
+            "display-lg": ["sourceSerif4"],
+            "headline-lg": ["sourceSerif4"]
+          },
+          fontSize: {
+            "body-md": ["16px", { lineHeight: "1.7", fontWeight: "400" }],
+            "body-lg": ["18px", { lineHeight: "1.8", fontWeight: "400" }],
+            "title-md": ["20px", { lineHeight: "1.5", fontWeight: "600" }],
+            "label-sm": ["13px", { lineHeight: "1.4", letterSpacing: "0.05em", fontWeight: "500" }],
+            "display-lg": ["32px", { lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "600" }],
+            "headline-lg": ["24px", { lineHeight: "1.3", fontWeight: "600" }]
+          }
+        }
+      }
+    };
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .card {
+      background-color: #ffffff;
+      border: 1px solid rgba(166, 139, 106, 0.2);
+      border-radius: 0.75rem;
+      overflow: hidden;
+    }
+    .card-header {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem;
+      background-color: #f5ece7;
+      transition: background-color 0.2s;
+    }
+    .card-header:hover { background-color: #efe6e2; }
+    .card-content {
+      padding: 1rem;
+      border-top: 1px solid rgba(209, 196, 185, 0.4);
+    }
+    .card.collapsed .card-content { display: none; }
+    .card.collapsed .card-icon { transform: rotate(-90deg); }
+    .card-icon { transition: transform 0.3s ease; }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+    .tag-green {
+      background-color: #e8f5e9;
+      color: #1b5e20;
+      border: 1px solid #a5d6a7;
+    }
+    .tag-red {
+      background-color: #fbe9e7;
+      color: #bf360c;
+      border: 1px solid #ffccbc;
+    }
+  </style>
+
+  <script>
+    // Tab switching
+    function switchTab(tabNum) {
+      window.scrollTo(0, 0);
+
+      document.querySelectorAll('.tab-btn').forEach(b => {
+        if (parseInt(b.dataset.tab) === tabNum) {
+          b.classList.add('text-primary', 'font-bold', 'border-b-2', 'border-primary');
+          b.classList.remove('text-on-surface-variant', 'border-transparent');
+        } else {
+          b.classList.remove('text-primary', 'font-bold', 'border-b-2', 'border-primary');
+          b.classList.add('text-on-surface-variant', 'border-transparent');
+        }
+      });
+
+      document.querySelectorAll('.tab-content').forEach(content => {
+        content.style.display = content.id === `tab-${tabNum}` ? 'flex' : 'none';
+      });
+    }
+
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => switchTab(parseInt(btn.dataset.tab)));
+    });
+
+    // Card collapse/expand
+    function toggleCard(header) {
+      const card = header.parentElement;
+      card.classList.toggle('collapsed');
+    }
+
+    // (All data rendering functions from original result.html will be added in Task 4)
+  </script>
+</body>
+</html>
