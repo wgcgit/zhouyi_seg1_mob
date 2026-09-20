@@ -428,7 +428,525 @@
       card.classList.toggle('collapsed');
     }
 
-    // (All data rendering functions from original result.html will be added in Task 4)
+    // Four Pillars Vertical Display
+    function renderFourPillars(data) {
+      const container = document.getElementById('four-pillars-container');
+      if (!container || !data) return;
+
+      const basicInfo = data.基础信息 || {};
+      const fourPillars = basicInfo.四柱 || '';
+      const pillarNames = ['年柱', '月柱', '日柱', '时柱'];
+      const pillarSubtitles = ['祖上/早年', '父母/青年', '自身/中年', '子女/晚年'];
+
+      // Parse four pillars: "庚午 己丑 癸巳 乙卯"
+      const pillars = fourPillars.split(' ').filter(p => p);
+
+      let html = '';
+      pillars.forEach((pillar, index) => {
+        const tiangan = pillar.charAt(0);
+        const dizhi = pillar.charAt(1);
+
+        // Get related info from modules
+        let shishen = '';
+        let wangshuai = '';
+
+        const mod1 = data.模块一 || {};
+        const tianganList = mod1.天干十神 || [];
+        const found = tianganList.find(t => t.天干 === tiangan);
+        if (found) shishen = found.十神 || '';
+
+        const mod3 = data.模块三 || {};
+        const geju = mod3.格局定性 || '';
+
+        html += `
+          <div class="flex items-center justify-between p-4">
+            <div class="flex flex-col gap-1">
+              <span class="font-label-sm text-label-sm text-primary">${pillarNames[index]}</span>
+              <span class="font-headline-lg text-headline-lg text-on-surface font-semibold">${pillar}</span>
+            </div>
+            <div class="flex flex-col items-end gap-1">
+              <span class="tag tag-green text-xs">${shishen || '—'}</span>
+              <span class="font-label-sm text-label-sm text-on-surface-variant">${pillarSubtitles[index]}</span>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    // Render data from sessionStorage
+    function renderData(raw) {
+      if (!raw) return;
+
+      // Normalize field names (reusing logic from original)
+      const data = normalizeAdvancedData(raw);
+      normalizeModuleFormats(data);
+
+      // Basic info
+      const basicInfo = data.基础信息 || {};
+      document.getElementById('sidebar-name').textContent = basicInfo.姓名 || basicInfo.日主 || '用户';
+      document.getElementById('sidebar-pillar').textContent = `${basicInfo.乾造坤造 || '乾造'}：${basicInfo.四柱 || ''}`;
+
+      // Four pillars
+      renderFourPillars(data);
+
+      // Pattern summary
+      const core = data.核心速览 || {};
+      document.getElementById('pattern-summary').textContent = core.一句话总结 || core.格局定性 || '';
+
+      // Yongshen tags
+      const yongshenList = document.getElementById('yongshen-list');
+      yongshenList.innerHTML = '';
+      (core.用神 || []).forEach(v => {
+        const tag = document.createElement('span');
+        tag.className = 'tag tag-green mr-1';
+        tag.textContent = v;
+        yongshenList.appendChild(tag);
+      });
+
+      // Jishen tags
+      const jishenList = document.getElementById('jishen-list');
+      jishenList.innerHTML = '';
+      (core.忌神 || []).forEach(v => {
+        const tag = document.createElement('span');
+        tag.className = 'tag tag-red mr-1';
+        tag.textContent = v;
+        jishenList.appendChild(tag);
+      });
+
+      // Module rendering calls (simplified for mobile)
+      renderModule1(data);
+      renderModule2(data);
+      renderModule3(data);
+      renderModule4(data);
+      renderModule5(data);
+      renderModule6(data);
+      renderModule7(data);
+      renderModule8(data);
+      renderModule9(data);
+      renderModule10(data);
+      renderModule11(data);
+      renderModule12(data);
+      renderModule13(data);
+    }
+
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', () => {
+      try {
+        const dataStr = sessionStorage.getItem('paipanResult');
+        const data = dataStr ? JSON.parse(dataStr) : null;
+        renderData(data);
+      } catch (e) {
+        console.warn('Failed to parse paipanResult:', e);
+      }
+    });
+
+    // Simplified module renderers for mobile
+
+    function renderModule1(data) {
+      const container = document.getElementById('module1-content');
+      if (!container) return;
+      const mod1 = data.模块一 || {};
+
+      let html = '';
+
+      // 天干十神
+      const tiangan = mod1.天干十神 || [];
+      if (tiangan.length > 0) {
+        html += '<div class="mb-4"><h4 class="font-label-sm text-label-sm text-primary mb-2">天干十神</h4><div class="overflow-x-auto"><table class="w-full text-sm"><thead><tr class="border-b border-outline-variant"><th class="py-2 pr-3 text-left text-on-surface-variant">干位</th><th class="py-2 pr-3 text-left text-on-surface-variant">天干</th><th class="py-2 pr-3 text-left text-on-surface-variant">十神</th><th class="py-2 text-left text-on-surface-variant">说明</th></tr></thead><tbody>';
+        tiangan.forEach(t => {
+          html += `<tr class="border-b border-outline-variant/30"><td class="py-2 pr-3 text-on-surface">${t.干位 || ''}</td><td class="py-2 pr-3 text-on-surface">${t.天干 || ''}</td><td class="py-2 pr-3"><span class="tag tag-green text-xs">${t.十神 || ''}</span></td><td class="py-2 text-on-surface-variant text-xs">${t.说明 || ''}</td></tr>`;
+        });
+        html += '</tbody></table></div></div>';
+      }
+
+      // 原局核心组合
+      const combos = mod1.原局核心组合 || [];
+      if (combos.length > 0) {
+        html += '<div><h4 class="font-label-sm text-label-sm text-primary mb-2">原局核心组合</h4><div class="flex flex-col gap-2">';
+        combos.forEach((combo, i) => {
+          html += `<div class="p-3 bg-surface-container-low rounded-lg"><div class="flex items-center gap-2 mb-1"><span class="font-label-sm text-label-sm text-primary bg-primary/10 px-2 py-0.5 rounded">组合${i+1}</span><span class="font-label-sm text-label-sm text-on-surface-variant">${combo.组合类型 || ''}</span></div><div class="font-body-md text-body-md text-on-surface font-medium text-sm">${combo.组合名称 || ''}</div><div class="font-body-md text-body-md text-on-surface-variant text-xs mt-1">${combo.象义 || combo.描述 || ''}</div></div>`;
+        });
+        html += '</div></div>';
+      }
+
+      container.innerHTML = html || '<p class="text-on-surface-variant text-sm">暂无数据</p>';
+    }
+
+    function renderModule2(data) {
+      const container = document.getElementById('module2-content');
+      if (!container) return;
+      const mod2 = data.模块二 || {};
+      const conflicts = mod2.刑冲合害列表 || [];
+
+      if (conflicts.length === 0) {
+        container.innerHTML = '<p class="text-on-surface-variant text-sm">暂无数据</p>';
+        return;
+      }
+
+      let html = '';
+      conflicts.forEach(conf => {
+        html += `<div class="relative pl-6 mb-4"><div class="absolute left-0 top-1 w-5 h-5 rounded-full bg-surface border-2 border-primary flex items-center justify-center"><div class="w-1.5 h-1.5 rounded-full bg-primary"></div></div><h4 class="font-title-md text-title-md text-on-surface mb-1 text-sm">${conf.名称 || ''} <span class="text-xs text-on-surface-variant">(${conf.类型 || ''})</span></h4>${conf.核心定义 ? `<p class="font-body-md text-body-md text-on-surface font-medium text-xs mb-1">${conf.核心定义}</p>` : ''}${conf.人事心性象义 ? `<p class="font-body-md text-body-md text-on-surface-variant text-xs">${conf.人事心性象义}</p>` : ''}</div>`;
+      });
+
+      if (mod2.模块小结) {
+        html += `<div class="bg-primary/5 border border-primary/20 p-3 rounded-lg mt-4"><h4 class="font-label-sm text-label-sm text-primary mb-1">地支总结</h4><p class="font-body-md text-body-md text-on-surface-variant text-xs">${mod2.模块小结}</p></div>`;
+      }
+
+      container.innerHTML = html;
+    }
+
+    function renderModule3(data) {
+      const wangshuaiContainer = document.getElementById('module3-wangshuai');
+      const yongshenContainer = document.getElementById('module3-yongshen');
+      const mod3 = data.模块三 || {};
+
+      // 旺衰判断
+      if (wangshuaiContainer) {
+        const wangshuai = mod3.旺衰判断 || {};
+        let html = '';
+        if (Object.keys(wangshuai).length > 0) {
+          html += '<div class="mb-4"><h4 class="font-label-sm text-label-sm text-primary mb-2">旺衰判断</h4><div class="flex flex-col gap-2">';
+          if (wangshuai.得令) html += `<div class="bg-surface-container-low p-3 rounded-lg border-l-2 border-emerald-500"><div class="font-label-sm text-label-sm text-emerald-600 mb-1">得令</div><p class="font-body-md text-body-md text-on-surface-variant text-xs">${wangshuai.得令}</p></div>`;
+          if (wangshuai.得地) html += `<div class="bg-surface-container-low p-3 rounded-lg border-l-2 border-blue-500"><div class="font-label-sm text-label-sm text-blue-600 mb-1">得地</div><p class="font-body-md text-body-md text-on-surface-variant text-xs">${wangshuai.得地}</p></div>`;
+          if (wangshuai.得势) html += `<div class="bg-surface-container-low p-3 rounded-lg border-l-2 border-amber-500"><div class="font-label-sm text-label-sm text-amber-600 mb-1">得势</div><p class="font-body-md text-body-md text-on-surface-variant text-xs">${wangshuai.得势}</p></div>`;
+          html += '</div></div>';
+        }
+        if (mod3.格局定性) {
+          html += `<div class="bg-surface-container-low p-3 rounded-lg"><span class="font-label-sm text-label-sm text-on-surface-variant">格局定性：</span><span class="font-body-md text-body-md text-on-surface font-medium text-sm">${mod3.格局定性}</span></div>`;
+        }
+        wangshuaiContainer.innerHTML = html || '<p class="text-on-surface-variant text-sm">暂无数据</p>';
+      }
+
+      // 用神忌神
+      if (yongshenContainer) {
+        const yongshenData = mod3.喜忌用神 || {};
+        const firstGod = yongshenData.第一用神 || '';
+        const avoidGod = yongshenData.忌神 || '';
+        const logic = yongshenData.取用逻辑 || '';
+
+        let html = '<div class="flex flex-col gap-3">';
+        if (firstGod) html += `<div class="bg-surface-container-low p-3 rounded-lg border-l-2 border-emerald-500"><div class="flex items-center gap-2 mb-1"><span class="material-symbols-outlined text-emerald-600 text-sm">check_circle</span><h4 class="font-label-sm text-label-sm text-emerald-600">用神</h4></div><span class="tag tag-green text-sm">${firstGod}</span></div>`;
+        if (avoidGod) html += `<div class="bg-surface-container-low p-3 rounded-lg border-l-2 border-red-500"><div class="flex items-center gap-2 mb-1"><span class="material-symbols-outlined text-red-600 text-sm">cancel</span><h4 class="font-label-sm text-label-sm text-red-600">忌神</h4></div><span class="tag tag-red text-sm">${avoidGod}</span></div>`;
+        if (logic) html += `<div class="bg-surface-container-low p-3 rounded-lg border-l-2 border-primary"><h4 class="font-label-sm text-label-sm text-primary mb-1">取用逻辑</h4><p class="font-body-md text-body-md text-on-surface-variant text-xs">${logic}</p></div>`;
+        html += '</div>';
+        yongshenContainer.innerHTML = html || '<p class="text-on-surface-variant text-sm">暂无数据</p>';
+      }
+    }
+
+    function renderModule4(data) {
+      const container = document.getElementById('module4-content');
+      if (!container) return;
+      const mod4 = data.模块四 || {};
+      const pillarAnalysis = mod4.逐柱分析 || {};
+
+      if (Object.keys(pillarAnalysis).length === 0) {
+        container.innerHTML = '<p class="text-on-surface-variant text-sm">暂无数据</p>';
+        return;
+      }
+
+      const pillarNames = { '年支': '年柱', '月支': '月柱', '日支': '日支', '时支': '时支' };
+      const pillarSubtitles = { '年支': '祖上/早年', '月支': '父母/青年', '日支': '自身/中年', '时支': '子女/晚年' };
+
+      let html = '<div class="grid grid-cols-2 gap-3">';
+      Object.keys(pillarAnalysis).forEach(key => {
+        const val = pillarAnalysis[key] || {};
+        html += `<div class="bg-surface border border-outline-variant/20 rounded-lg p-3 text-center"><span class="font-label-sm text-label-sm text-outline block">${pillarNames[key] || key}</span><span class="font-label-sm text-label-sm text-on-surface-variant block mb-2">${pillarSubtitles[key] || ''}</span><div class="bg-surface-container-low rounded-lg p-2 mb-1"><span class="font-body-md text-body-md text-primary font-medium text-sm">${val.理法 || val.状态 || '—'}</span></div><span class="font-body-sm text-on-surface-variant text-xs">${val.象法 || '—'}</span></div>`;
+      });
+      html += '</div>';
+
+      if (mod4.总结) html += `<div class="mt-3 p-3 bg-surface-container-low rounded-lg"><p class="font-body-md text-body-md text-on-surface-variant text-xs">${mod4.总结}</p></div>`;
+
+      container.innerHTML = html;
+    }
+
+    function renderModule5(data) {
+      const container = document.getElementById('module5-content');
+      if (!container) return;
+      const mod5 = data.模块五 || {};
+
+      let html = '';
+      if (mod5.性格优点) html += `<div class="flex gap-3 bg-surface-container-low p-3 rounded-lg"><span class="material-symbols-outlined text-emerald-600">thumb_up</span><div><strong class="block mb-1 text-emerald-600 text-sm">性格优点</strong><p class="text-on-surface-variant text-xs">${mod5.性格优点}</p></div></div>`;
+      if (mod5.性格短板) html += `<div class="flex gap-3 bg-surface-container-low p-3 rounded-lg mt-2"><span class="material-symbols-outlined text-red-600">thumb_down</span><div><strong class="block mb-1 text-red-600 text-sm">性格短板</strong><p class="text-on-surface-variant text-xs">${mod5.性格短板}</p></div></div>`;
+      if (mod5.核心心性痛点) html += `<div class="flex gap-3 bg-surface-container-low p-3 rounded-lg mt-2"><span class="material-symbols-outlined text-blue-600">warning</span><div><strong class="block mb-1 text-blue-600 text-sm">核心心性痛点</strong><p class="text-on-surface-variant text-xs">${mod5.核心心性痛点}</p></div></div>`;
+
+      container.innerHTML = html || '<p class="text-on-surface-variant text-sm">暂无数据</p>';
+    }
+
+    function renderModule6(data) {
+      const container = document.getElementById('module6-caiyun');
+      if (!container) return;
+      const mod6 = data.模块六 || {};
+
+      const items = [
+        { icon: 'work_history', title: '财运格局', content: mod6.财运格局 },
+        { icon: 'trending_up', title: '求财特质', content: mod6.求财特质 },
+        { icon: 'savings', title: '守财建议', content: mod6.守财建议 },
+        { icon: 'domain', title: '事业方向', content: mod6.事业方向 }
+      ].filter(i => i.content);
+
+      if (items.length === 0) {
+        container.innerHTML = '<p class="text-on-surface-variant text-sm">暂无数据</p>';
+        return;
+      }
+
+      let html = '';
+      items.forEach((item, idx) => {
+        if (idx > 0) html += '<div class="h-px w-full bg-outline-variant/30 my-3"></div>';
+        html += `<div class="flex items-start gap-3"><div class="bg-primary-container/20 p-2 rounded-lg text-primary shrink-0"><span class="material-symbols-outlined text-sm">${item.icon}</span></div><div><strong class="block text-secondary mb-1 text-sm">${item.title}</strong><p class="text-on-surface-variant text-xs">${item.content}</p></div></div>`;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function renderModule7(data) {
+      const container = document.getElementById('module7-content');
+      if (!container) return;
+      const mod7 = data.模块七 || {};
+
+      const items = [
+        { icon: 'home', title: '夫妻宫状态', content: mod7.夫妻宫状态 },
+        { icon: 'person', title: '配偶特质', content: mod7.配偶特质 },
+        { icon: 'heart_minus', title: '感情核心问题', content: mod7.感情核心问题 },
+        { icon: 'favorite', title: '情缘特点', content: mod7.情缘特点 }
+      ].filter(i => i.content);
+
+      if (items.length === 0) {
+        container.innerHTML = '<p class="text-on-surface-variant text-sm">暂无数据</p>';
+        return;
+      }
+
+      let html = '';
+      items.forEach(item => {
+        html += `<div class="flex gap-3 bg-surface-container-low p-3 rounded-lg"><span class="material-symbols-outlined text-primary shrink-0">${item.icon}</span><div><strong class="block mb-1 text-secondary text-sm">${item.title}</strong><p class="text-on-surface-variant text-xs">${item.content}</p></div></div>`;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function renderModule8(data) {
+      const container = document.getElementById('module8-content');
+      if (!container) return;
+      const mod8 = data.模块八 || {};
+      const healthData = mod8.健康隐患 || mod8;
+
+      let sections = [];
+      if (Array.isArray(healthData)) {
+        sections = healthData.map(item => ({ title: item.部位 || item.系统 || '健康', content: item.提示 || item.建议 || '' }));
+      } else if (healthData && typeof healthData === 'object') {
+        if (healthData.重点养护部位) sections.push({ title: '重点养护部位', content: healthData.重点养护部位 });
+        if (healthData.先天体质隐患) sections.push({ title: '先天体质隐患', content: healthData.先天体质隐患 });
+        if (healthData.高发问题) sections.push({ title: '高发问题', content: healthData.高发问题 });
+        if (healthData.养生建议) sections.push({ title: '养生建议', content: healthData.养生建议 });
+      }
+
+      if (sections.length === 0) {
+        container.innerHTML = '<p class="text-on-surface-variant text-sm">暂无数据</p>';
+        return;
+      }
+
+      let html = '<div class="grid grid-cols-2 gap-3">';
+      sections.forEach(section => {
+        html += `<div class="p-3 bg-surface-container-low rounded-lg border border-outline-variant/20"><h3 class="font-label-sm text-label-sm text-secondary mb-1">${section.title}</h3><p class="font-body-md text-body-md text-on-surface text-xs">${section.content}</p></div>`;
+      });
+      html += '</div>';
+
+      container.innerHTML = html;
+    }
+
+    function renderModule9(data) {
+      const container = document.getElementById('module9-content');
+      if (!container) return;
+      const mod9 = data.模块九 || {};
+
+      if (!mod9.大运序列 || mod9.大运序列.length === 0) {
+        container.innerHTML = '<p class="text-on-surface-variant text-sm">暂无数据</p>';
+        return;
+      }
+
+      let html = '<div class="overflow-x-auto"><table class="w-full text-left text-xs"><thead><tr class="border-b border-outline-variant"><th class="py-2 pr-3 text-on-surface-variant">岁数</th><th class="py-2 pr-3 text-on-surface-variant">干支</th><th class="py-2 pr-3 text-on-surface-variant">吉凶</th><th class="py-2 text-on-surface-variant">核心利弊</th></tr></thead><tbody>';
+      mod9.大运序列.forEach(d => {
+        const jixiong = d.吉凶定性 || '';
+        const colorClass = jixiong === '吉' ? 'text-emerald-600' : jixiong === '凶' ? 'text-red-600' : 'text-amber-600';
+        html += `<tr class="border-b border-outline-variant/30"><td class="py-2 pr-3 font-medium">${d.岁数 || ''}</td><td class="py-2 pr-3">${d.天干地支 || ''}</td><td class="py-2 pr-3 ${colorClass} font-medium">${jixiong}</td><td class="py-2">${d.核心利弊 || ''}</td></tr>`;
+      });
+      html += '</tbody></table></div>';
+
+      if (mod9.大运总逻辑) html += `<div class="mt-3 p-3 bg-surface-container-low rounded-lg border-l-2 border-primary"><p class="text-on-surface-variant text-xs">${mod9.大运总逻辑}</p></div>`;
+
+      container.innerHTML = html;
+    }
+
+    function renderModule10(data) {
+      const container = document.getElementById('module10-content');
+      if (!container) return;
+      const mod10 = data.模块十 || {};
+      const prosCons = mod10.全局优劣势 || {};
+      const landingAdvice = mod10.落地建议;
+
+      let html = '';
+
+      if (prosCons.最大优势) html += `<div class="mb-3"><h4 class="font-label-sm text-label-sm text-emerald-600 mb-1">最大优势</h4><p class="text-on-surface-variant text-xs">${prosCons.最大优势}</p></div>`;
+      if (prosCons.核心短板) html += `<div class="mb-3"><h4 class="font-label-sm text-label-sm text-red-600 mb-1">核心短板</h4><p class="text-on-surface-variant text-xs">${prosCons.核心短板}</p></div>`;
+
+      if (landingAdvice && typeof landingAdvice === 'object') {
+        const categories = ['事业', '求财', '人际', '婚姻', '养生', '心态', '避坑'];
+        const icons = { 事业: 'work', 求财: 'paid', 人际: 'people', 婚姻: 'favorite', 养生: 'spa', 心态: 'psychology', 避坑: 'warning' };
+        html += '<div class="grid grid-cols-2 gap-2 mt-3">';
+        categories.forEach(cat => {
+          if (landingAdvice[cat]) html += `<div class="bg-surface-container-low p-2 rounded-lg"><div class="flex items-center gap-1 mb-1"><span class="material-symbols-outlined text-primary text-xs">${icons[cat]}</span><span class="font-label-sm text-label-sm text-primary">${cat}</span></div><p class="text-on-surface-variant text-xs">${landingAdvice[cat]}</p></div>`;
+        });
+        html += '</div>';
+      }
+
+      container.innerHTML = html || '<p class="text-on-surface-variant text-sm">暂无数据</p>';
+    }
+
+    function renderModule11(data) {
+      const container = document.getElementById('module11-content');
+      if (!container) return;
+      const mod11 = data.模块十一 || {};
+
+      let html = '';
+      if (mod11.父亲) html += `<div class="bg-surface-container-low p-3 rounded-lg mb-2"><h4 class="font-label-sm text-label-sm text-primary mb-1">父亲</h4><p class="text-on-surface-variant text-xs">${typeof mod11.父亲 === 'string' ? mod11.父亲 : mod11.父亲.性格 || mod11.父亲.事业 || ''}</p></div>`;
+      if (mod11.母亲) html += `<div class="bg-surface-container-low p-3 rounded-lg mb-2"><h4 class="font-label-sm text-label-sm text-primary mb-1">母亲</h4><p class="text-on-surface-variant text-xs">${typeof mod11.母亲 === 'string' ? mod11.母亲 : mod11.母亲.性格 || mod11.母亲.事业 || ''}</p></div>`;
+      if (mod11.原生家庭格局) html += `<div class="bg-surface-container-low p-3 rounded-lg border-l-2 border-primary"><h4 class="font-label-sm text-label-sm text-primary mb-1">原生家庭格局</h4><p class="text-on-surface-variant text-xs">${mod11.原生家庭格局}</p></div>`;
+
+      container.innerHTML = html || '<p class="text-on-surface-variant text-sm">暂无数据</p>';
+    }
+
+    function renderModule12(data) {
+      const container = document.getElementById('module12-content');
+      if (!container) return;
+      const mod12 = data.模块十二 || {};
+
+      const items = [
+        { icon: 'schedule', title: '时机与缘分', content: mod12.子女缘分 },
+        { icon: 'emoji_objects', title: '性格禀赋', content: mod12.子女性格天赋 },
+        { icon: 'handshake', title: '情感羁绊', content: mod12.亲子关系 }
+      ].filter(i => i.content);
+
+      if (items.length === 0) {
+        container.innerHTML = '<p class="text-on-surface-variant text-sm">暂无数据</p>';
+        return;
+      }
+
+      let html = '<div class="grid grid-cols-1 gap-3">';
+      items.forEach(item => {
+        html += `<div class="bg-surface-container-low p-3 rounded-lg"><div class="flex items-center gap-2 mb-1"><span class="material-symbols-outlined text-primary">${item.icon}</span><h4 class="font-label-sm text-label-sm text-primary">${item.title}</h4></div><p class="text-on-surface-variant text-xs">${item.content}</p></div>`;
+      });
+      html += '</div>';
+
+      container.innerHTML = html;
+    }
+
+    function renderModule13(data) {
+      const container = document.getElementById('module13-content');
+      if (!container) return;
+      const mod13 = data.模块十三 || {};
+
+      let html = '';
+
+      if (mod13.格局深度拆解) {
+        html += '<div class="mb-3"><h4 class="font-label-sm text-label-sm text-primary mb-2">格局深度拆解</h4>';
+        if (typeof mod13.格局深度拆解 === 'string') {
+          html += `<p class="text-on-surface-variant text-xs">${mod13.格局深度拆解}</p>`;
+        }
+        html += '</div>';
+      }
+
+      if (mod13.人事终极规律 || mod13.终极规律) {
+        const renshi = mod13.人事终极规律 || mod13.终极规律;
+        html += '<div><h4 class="font-label-sm text-label-sm text-primary mb-2">人事终极规律</h4>';
+        if (typeof renshi === 'string') {
+          html += `<p class="text-on-surface-variant text-xs">${renshi}</p>`;
+        }
+        html += '</div>';
+      }
+
+      container.innerHTML = html || '<p class="text-on-surface-variant text-sm">暂无数据</p>';
+    }
+
+    // normalizeAdvancedData and normalizeModuleFormats functions from original
+    function normalizeAdvancedData(raw) {
+      const data = {};
+      const isVariantB = !!raw['模块一：四柱、藏干、十神 & 原局核心组合'];
+      if (isVariantB) {
+        const map = {
+          '前置基础信息': '基础信息',
+          '模块一：四柱、藏干、十神 & 原局核心组合': '模块一',
+          '模块二：地支刑冲合害完整拆解': '模块二',
+          '模块三：日主旺衰 + 格局定性 + 喜忌取用': '模块三',
+          '模块四：日主十二长生旺衰全解': '模块四',
+          '模块五：性格心性深度解读': '模块五',
+          '模块六：事业财运专项解析': '模块六',
+          '模块七：婚姻感情家庭解析': '模块七',
+          '模块八：身体健康专项提示': '模块八',
+          '模块九：大运整体逻辑解析': '模块九',
+          '模块十：全局总结 + 现实落地建议': '模块十',
+          '模块十一：父母六亲解析': '模块十一',
+          '模块十二：子女六亲解析': '模块十二',
+          '模块十三：命局格局深度复盘': '模块十三',
+        };
+        for (const [k, v] of Object.entries(raw)) {
+          if (map[k]) data[map[k]] = v;
+        }
+        if (raw.基础信息 && typeof raw.基础信息 === 'object') {
+          const jc = Object.assign({}, raw.基础信息);
+          if (jc['乾造/坤造']) jc['乾造坤造'] = jc['乾造/坤造'];
+          if (jc['完整四柱']) jc['四柱'] = jc['完整四柱'];
+          data['基础信息'] = jc;
+        }
+        if (typeof raw.核心标注 === 'string') {
+          data['核心速览'] = { '一句话总结': raw.基础概况 || raw.核心标注, '格局定性': '', '用神': [], '忌神': [] };
+        } else if (typeof raw.核心标注 === 'object' && raw.核心标注) {
+          data['核心速览'] = { '一句话总结': raw.核心标注.全局核心关键词 || '', '格局定性': '', '用神': [], '忌神': [] };
+        }
+        if (typeof raw.基础概况 === 'string') {
+          data['基础概况'] = { '身旺/身弱/中和': '', '格局类型': '', '整体优缺点': raw.基础概况 };
+        } else if (typeof raw.基础概况 === 'object' && raw.基础概况) {
+          data['基础概况'] = raw.基础概况;
+        }
+      } else {
+        if (raw.基础信息 && typeof raw.基础信息 === 'object') {
+          const jc = Object.assign({}, raw.基础信息);
+          if (jc['乾造/坤造']) jc['乾造坤造'] = jc['乾造/坤造'];
+          if (jc['完整四柱']) jc['四柱'] = jc['完整四柱'];
+          if (jc.四柱 && typeof jc.四柱 === 'object') {
+            jc['四柱'] = [jc.四柱.年柱, jc.四柱.月柱, jc.四柱.日柱, jc.四柱.时柱].join(' ');
+          }
+          data['基础信息'] = jc;
+        }
+        if (raw.核心速览) data['核心速览'] = Object.assign({}, raw.核心速览);
+        if (raw.基础概况) data['基础概况'] = typeof raw.基础概况 === 'string' ? { '身旺/身弱/中和': '', '格局类型': '', '整体优缺点': raw.基础概况 } : Object.assign({}, raw.基础概况);
+        const moduleKeys = ['模块一','模块二','模块三','模块四','模块五','模块六','模块七','模块八','模块九','模块十','模块十一','模块十二','模块十三'];
+        for (const k of moduleKeys) { if (raw[k]) data[k] = Object.assign({}, raw[k]); }
+      }
+      return data;
+    }
+
+    function normalizeModuleFormats(data) {
+      if (!data || typeof data !== 'object') return data;
+      const m3 = data.模块三;
+      if (m3 && typeof m3 === 'object' && !Array.isArray(m3)) {
+        if (m3.喜忌取用 && !m3.喜忌用神) { m3.喜忌用神 = m3.喜忌取用; delete m3.喜忌取用; }
+      }
+      const m5 = data.模块五;
+      if (m5 && typeof m5 === 'object' && !Array.isArray(m5)) {
+        if (!m5.性格优点) m5.性格优点 = m5.优点 || m5.优点特质 || '';
+        if (!m5.性格短板) m5.性格短板 = m5.缺点 || m5.短板缺陷 || '';
+      }
+      const m7 = data.模块七;
+      if (m7 && typeof m7 === 'object' && !Array.isArray(m7)) {
+        if (!m7.夫妻宫状态) m7.夫妻宫状态 = m7.夫妻宫 ? m7.夫妻宫 + (m7.婚姻状态 ? '，' + m7.婚姻状态 : '') : '';
+      }
+      const m8 = data.模块八;
+      if (m8 && typeof m8 === 'object' && !Array.isArray(m8)) {
+        data.模块八 = { '健康隐患': { '重点养护部位': m8.重点部位 || '', '先天体质隐患': m8.健康隐患 || '', '高发问题': m8.高发问题 || '', '养生建议': m8.养生建议 || '' } };
+      }
+      return data;
+    }
   </script>
 </body>
 </html>
