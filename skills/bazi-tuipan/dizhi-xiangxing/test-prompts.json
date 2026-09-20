@@ -1,0 +1,42 @@
+[
+  {
+    "id": "dxx-001",
+    "prompt": "寅巳申无恩之刑是什么意思？",
+    "expected_skill": "dizhi-xiangxing",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问无恩之刑"
+  },
+  {
+    "id": "dxx-002",
+    "prompt": "丑未戌恃势之刑为什么是三土互斗？",
+    "expected_skill": "dizhi-xiangxing",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问恃势之刑"
+  },
+  {
+    "id": "dxx-003",
+    "prompt": "自刑是不是自己伤害自己？",
+    "expected_skill": "dizhi-xiangxing",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问自刑定义"
+  },
+  {
+    "id": "dxx-004",
+    "prompt": "刑忌神和刑吉神怎么判断？",
+    "expected_skill": "dizhi-xiangxing",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问刑的喜忌判断"
+  },
+  {
+    "id": "dxx-005",
+    "prompt": "冲、穿、刑哪个最凶？",
+    "expected_skill": "dizhi-xiangxing",
+    "should_fire": false,
+    "category": "诱饵-边界模糊",
+    "note": "需要具体八字背景"
+  }
+]

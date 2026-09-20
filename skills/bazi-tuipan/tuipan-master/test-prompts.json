@@ -1,0 +1,82 @@
+[
+  {
+    "id": "tpm-001",
+    "prompt": "测一下这个人的八字：女阳历1987年12月6号晚上6:30",
+    "expected_skill": "tuipan-master",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "典型用户输入，触发总入口"
+  },
+  {
+    "id": "tpm-002",
+    "prompt": "排一下这个人的八字：女命，庚申年 戊子月 癸未日，庚申时",
+    "expected_skill": "tuipan-master",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "用户直接给出八字触发"
+  },
+  {
+    "id": "tpm-003",
+    "prompt": "看一下这个命盘：男命己未年甲戌月甲子日戊辰时",
+    "expected_skill": "tuipan-master",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "看命盘触发"
+  },
+  {
+    "id": "tpm-004",
+    "prompt": "算一下八字：女命1995年3月12日上午10点",
+    "expected_skill": "tuipan-master",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "算八字触发"
+  },
+  {
+    "id": "tpm-005",
+    "prompt": "甲己合是什么意思？",
+    "expected_skill": "tiangan-wuhe",
+    "should_fire": false,
+    "category": "诱饵-应触发同书另一skill",
+    "note": "这是问天干五合，不是排盘总入口"
+  },
+  {
+    "id": "tpm-006",
+    "prompt": "日主身旺好还是身弱好？",
+    "expected_skill": "shengshuai-panbie",
+    "should_fire": false,
+    "category": "诱饵-应触发子skill",
+    "note": "这是问旺衰判断，不是完整推盘"
+  },
+  {
+    "id": "tpm-007",
+    "prompt": "子午冲代表什么？",
+    "expected_skill": "dizhi-liuchong",
+    "should_fire": false,
+    "category": "诱饵-应触发子skill",
+    "note": "问六冲，不是完整推盘"
+  },
+  {
+    "id": "tpm-008",
+    "prompt": "八字里缺火会怎样？",
+    "expected_skill": "wuxing-shengke",
+    "should_fire": false,
+    "category": "诱饵-边界模糊",
+    "note": "可能触发五行理论，但也可能是完整推盘请求"
+  },
+  {
+    "id": "tpm-009",
+    "prompt": "帮我分析一个八字好吗？",
+    "expected_skill": "tuipan-master",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "通用分析八字请求"
+  },
+  {
+    "id": "tpm-010",
+    "prompt": "这个八字适合做生意吗？",
+    "expected_skill": "shishen-zuhe",
+    "should_fire": false,
+    "category": "诱饵-应触发子skill",
+    "note": "问事业方向，但缺少完整八字信息"
+  }
+]

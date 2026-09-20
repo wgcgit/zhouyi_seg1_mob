@@ -1,0 +1,42 @@
+[
+  {
+    "id": "dsh-001",
+    "prompt": "申子辰三合水局是什么意思？",
+    "expected_skill": "dizhi-sanhe",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问具体三合局"
+  },
+  {
+    "id": "dsh-002",
+    "prompt": "三合和六合有什么区别？",
+    "expected_skill": "dizhi-sanhe",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问三合vs六合"
+  },
+  {
+    "id": "dsh-003",
+    "prompt": "冲中神为什么直接破三合局？",
+    "expected_skill": "dizhi-sanhe",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问三合破局"
+  },
+  {
+    "id": "dsh-004",
+    "prompt": "亥卯未合木，亥水生卯木，卯木生未土吗？",
+    "expected_skill": "dizhi-sanhe",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问三合内部流通"
+  },
+  {
+    "id": "dsh-005",
+    "prompt": "三合局成局了有什么象义？",
+    "expected_skill": "dizhi-sanhe",
+    "should_fire": false,
+    "category": "诱饵-边界模糊",
+    "note": "没有具体八字，无法触发"
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "id": "dyf-001",
+    "prompt": "大运怎么排？顺逆怎么定？",
+    "expected_skill": "dayun-fenxi",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问大运排法"
+  },
+  {
+    "id": "dyf-002",
+    "prompt": "起运岁数怎么算？",
+    "expected_skill": "dayun-fenxi",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问起运计算"
+  },
+  {
+    "id": "dyf-003",
+    "prompt": "用神大运和忌神大运有什么区别？",
+    "expected_skill": "dayun-fenxi",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问大运喜忌"
+  },
+  {
+    "id": "dyf-004",
+    "prompt": "阳男阴女为什么顺排？",
+    "expected_skill": "dayun-fenxi",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问顺逆规则"
+  },
+  {
+    "id": "dyf-005",
+    "prompt": "流年和大运是什么关系？",
+    "expected_skill": "dayun-fenxi",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问流年大运关系"
+  },
+  {
+    "id": "dyf-006",
+    "prompt": "我的大运什么时候最好？",
+    "expected_skill": "dayun-fenxi",
+    "should_fire": false,
+    "category": "诱饵-边界模糊",
+    "note": "没有提供具体八字"
+  }
+]

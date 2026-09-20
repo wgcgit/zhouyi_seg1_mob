@@ -1,0 +1,82 @@
+[
+  {
+    "id": "scs-001",
+    "prompt": "甲木日主的长生是什么？",
+    "expected_skill": "shier-changsheng",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问具体天干的长生"
+  },
+  {
+    "id": "scs-002",
+    "prompt": "十二长生顺序是什么？",
+    "expected_skill": "shier-changsheng",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问十二长生顺序"
+  },
+  {
+    "id": "scs-003",
+    "prompt": "阳干和阴干的十二长生有什么区别？",
+    "expected_skill": "shier-changsheng",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问阴阳逆行规则"
+  },
+  {
+    "id": "scs-004",
+    "prompt": "戊土的十二长生和丙火一样吗？",
+    "expected_skill": "shier-changsheng",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问戊土随丙火"
+  },
+  {
+    "id": "scs-005",
+    "prompt": "墓库冲开和合闭有什么区别？",
+    "expected_skill": "shier-changsheng",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问墓库状态"
+  },
+  {
+    "id": "scs-006",
+    "prompt": "日坐帝旺是什么意思？",
+    "expected_skill": "shier-changsheng",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问日支帝旺"
+  },
+  {
+    "id": "scs-007",
+    "prompt": "长生和帝旺哪个更吉？",
+    "expected_skill": "shier-changsheng",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问长生与帝旺对比"
+  },
+  {
+    "id": "scs-008",
+    "prompt": "我的八字日主无根，是不是绝了？",
+    "expected_skill": "shier-changsheng",
+    "should_fire": false,
+    "category": "诱饵-边界模糊",
+    "note": "需要具体八字才能分析"
+  },
+  {
+    "id": "scs-009",
+    "prompt": "十二长生能判断大运好坏吗？",
+    "expected_skill": "shier-changsheng",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问十二长生与大运关系"
+  },
+  {
+    "id": "scs-010",
+    "prompt": "己土的长生在哪个地支？",
+    "expected_skill": "shier-changsheng",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问己土长生"
+  }
+]

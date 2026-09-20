@@ -1,0 +1,58 @@
+[
+  {
+    "id": "ssz-001",
+    "prompt": "贪财坏印是什么意思？",
+    "expected_skill": "shishen-zuhe",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问具体组合"
+  },
+  {
+    "id": "ssz-002",
+    "prompt": "杀印相生一定吉吗？",
+    "expected_skill": "shishen-zuhe",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问组合条件"
+  },
+  {
+    "id": "ssz-003",
+    "prompt": "伤官见官为什么为祸百端？",
+    "expected_skill": "shishen-zuhe",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问伤官见官"
+  },
+  {
+    "id": "ssz-004",
+    "prompt": "官杀混杂怎么取清？",
+    "expected_skill": "shishen-zuhe",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问官杀混杂处理"
+  },
+  {
+    "id": "ssz-005",
+    "prompt": "食神制杀需要什么条件才成立？",
+    "expected_skill": "shishen-zuhe",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问制杀条件"
+  },
+  {
+    "id": "ssz-006",
+    "prompt": "枭神夺食有救应吗？",
+    "expected_skill": "shishen-zuhe",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问救应方案"
+  },
+  {
+    "id": "ssz-007",
+    "prompt": "我的八字有官印相生，是不是当官？",
+    "expected_skill": "shishen-zuhe",
+    "should_fire": false,
+    "category": "诱饵-边界模糊",
+    "note": "没有提供具体八字"
+  }
+]

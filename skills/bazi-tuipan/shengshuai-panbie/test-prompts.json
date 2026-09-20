@@ -1,0 +1,58 @@
+[
+  {
+    "id": "ssp-001",
+    "prompt": "日主身旺和身弱有什么区别？",
+    "expected_skill": "shengshuai-panbie",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问旺衰基础"
+  },
+  {
+    "id": "ssp-002",
+    "prompt": "得令、得地、得势分别指什么？",
+    "expected_skill": "shengshuai-panbie",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问旺衰三要素"
+  },
+  {
+    "id": "ssp-003",
+    "prompt": "为什么月令权重最大？",
+    "expected_skill": "shengshuai-panbie",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问得令重要性"
+  },
+  {
+    "id": "ssp-004",
+    "prompt": "根气被冲坏了怎么办？",
+    "expected_skill": "shengshuai-panbie",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问根气受损"
+  },
+  {
+    "id": "ssp-005",
+    "prompt": "从格和身弱有什么区别？",
+    "expected_skill": "shengshuai-panbie",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问从格判断"
+  },
+  {
+    "id": "ssp-006",
+    "prompt": "天干一片印比，为什么还得地才能身旺？",
+    "expected_skill": "shengshuai-panbie",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问虚帮问题"
+  },
+  {
+    "id": "ssp-007",
+    "prompt": "我的八字身旺，适合做什么工作？",
+    "expected_skill": "shengshuai-panbie",
+    "should_fire": false,
+    "category": "诱饵-边界模糊",
+    "note": "没有提供具体八字"
+  }
+]

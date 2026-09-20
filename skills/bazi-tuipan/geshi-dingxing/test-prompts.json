@@ -1,0 +1,42 @@
+[
+  {
+    "id": "gsd-001",
+    "prompt": "月令是财就是财格吗？",
+    "expected_skill": "geshi-dingxing",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问格局定义"
+  },
+  {
+    "id": "gsd-002",
+    "prompt": "格局成和破怎么判断？",
+    "expected_skill": "geshi-dingxing",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问格局成败"
+  },
+  {
+    "id": "gsd-003",
+    "prompt": "破格有救应吗？",
+    "expected_skill": "geshi-dingxing",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问救应"
+  },
+  {
+    "id": "gsd-004",
+    "prompt": "通关在格局里怎么用？",
+    "expected_skill": "geshi-dingxing",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问通关与格局"
+  },
+  {
+    "id": "gsd-005",
+    "prompt": "我的八字是什么格局？",
+    "expected_skill": "geshi-dingxing",
+    "should_fire": false,
+    "category": "诱饵-边界模糊",
+    "note": "没有提供具体八字"
+  }
+]

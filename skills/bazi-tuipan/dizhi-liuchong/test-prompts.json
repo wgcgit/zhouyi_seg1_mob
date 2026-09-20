@@ -1,0 +1,50 @@
+[
+  {
+    "id": "dlc-001",
+    "prompt": "子午冲代表什么？",
+    "expected_skill": "dizhi-liuchong",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问具体六冲"
+  },
+  {
+    "id": "dlc-002",
+    "prompt": "冲忌神为什么是吉的？",
+    "expected_skill": "dizhi-liuchong",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问六冲铁律"
+  },
+  {
+    "id": "dlc-003",
+    "prompt": "辰戌冲和子午冲有什么区别？",
+    "expected_skill": "dizhi-liuchong",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问六冲分类"
+  },
+  {
+    "id": "dlc-004",
+    "prompt": "驿马冲和四正冲哪个力量更大？",
+    "expected_skill": "dizhi-liuchong",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问六冲力量排序"
+  },
+  {
+    "id": "dlc-005",
+    "prompt": "冲宫位和冲用神有什么区别？",
+    "expected_skill": "dizhi-liuchong",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问宫位应事"
+  },
+  {
+    "id": "dlc-006",
+    "prompt": "我的八字有卯酉冲，代表什么？",
+    "expected_skill": "dizhi-liuchong",
+    "should_fire": false,
+    "category": "诱饵-边界模糊",
+    "note": "没有提供完整八字，无法分析"
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "id": "dsu-001",
+    "prompt": "寅卯辰三会木局是什么意思？",
+    "expected_skill": "dizhi-sanhui",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问具体三会局"
+  },
+  {
+    "id": "dsu-002",
+    "prompt": "三会和三合哪个力量更大？",
+    "expected_skill": "dizhi-sanhui",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问三会vs三合"
+  },
+  {
+    "id": "dsu-003",
+    "prompt": "三会优先于三合和六合吗？",
+    "expected_skill": "dizhi-sanhui",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问优先度"
+  },
+  {
+    "id": "dsu-004",
+    "prompt": "冲中神为什么对三会破坏最大？",
+    "expected_skill": "dizhi-sanhui",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问三会破局"
+  },
+  {
+    "id": "dsu-005",
+    "prompt": "三会里面内部有穿害吗？",
+    "expected_skill": "dizhi-sanhui",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问三会内部矛盾"
+  }
+]

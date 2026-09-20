@@ -1,0 +1,50 @@
+[
+  {
+    "id": "ssj-001",
+    "prompt": "正官和七杀有什么区别？",
+    "expected_skill": "shishen-jichu",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问十神基础"
+  },
+  {
+    "id": "ssj-002",
+    "prompt": "甲木日主，庚金是什么十神？",
+    "expected_skill": "shishen-jichu",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "十神判断"
+  },
+  {
+    "id": "ssj-003",
+    "prompt": "正印和偏印都是印星，有什么区别？",
+    "expected_skill": "shishen-jichu",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问阴阳区别"
+  },
+  {
+    "id": "ssj-004",
+    "prompt": "食神和伤官都是日主生的，有什么不同？",
+    "expected_skill": "shishen-jichu",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问食伤区别"
+  },
+  {
+    "id": "ssj-005",
+    "prompt": "比肩和劫财都是同我者，哪个更凶？",
+    "expected_skill": "shishen-jichu",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问比劫区别"
+  },
+  {
+    "id": "ssj-006",
+    "prompt": "八字里没有正官，是不是就没有事业？",
+    "expected_skill": "shishen-jichu",
+    "should_fire": false,
+    "category": "诱饵-边界模糊",
+    "note": "需要具体八字才能论断"
+  }
+]

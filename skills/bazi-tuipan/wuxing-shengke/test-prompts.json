@@ -1,0 +1,50 @@
+[
+  {
+    "id": "wxs-001",
+    "prompt": "生和克有什么区别？",
+    "expected_skill": "wuxing-shengke",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问生克基础"
+  },
+  {
+    "id": "wxs-002",
+    "prompt": "泄和耗有什么区别？",
+    "expected_skill": "wuxing-shengke",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问泄耗区别"
+  },
+  {
+    "id": "wxs-003",
+    "prompt": "什么是通关？",
+    "expected_skill": "wuxing-shengke",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问通关概念"
+  },
+  {
+    "id": "wxs-004",
+    "prompt": "亢则害是什么意思？",
+    "expected_skill": "wuxing-shengke",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问命理铁律"
+  },
+  {
+    "id": "wxs-005",
+    "prompt": "流通为贵是什么意思？",
+    "expected_skill": "wuxing-shengke",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问流通概念"
+  },
+  {
+    "id": "wxs-006",
+    "prompt": "我的八字五行缺火，需要补火吗？",
+    "expected_skill": "wuxing-shengke",
+    "should_fire": false,
+    "category": "诱饵-边界模糊",
+    "note": "需要具体八字才能论断"
+  }
+]

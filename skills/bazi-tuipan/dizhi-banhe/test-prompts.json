@@ -1,0 +1,42 @@
+[
+  {
+    "id": "dbh-001",
+    "prompt": "生地半合和墓地半合有什么区别？",
+    "expected_skill": "dizhi-banhe",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问半合分类"
+  },
+  {
+    "id": "dbh-002",
+    "prompt": "申子半合水代表什么？",
+    "expected_skill": "dizhi-banhe",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问具体半合"
+  },
+  {
+    "id": "dbh-003",
+    "prompt": "亥卯半合木是生地还是墓地？",
+    "expected_skill": "dizhi-banhe",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问半合类型判断"
+  },
+  {
+    "id": "dbh-004",
+    "prompt": "半三合力量比完整三合大还是小？",
+    "expected_skill": "dizhi-banhe",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问力量排序"
+  },
+  {
+    "id": "dbh-005",
+    "prompt": "子辰半合是生地还是墓地？",
+    "expected_skill": "dizhi-banhe",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问具体半合分类"
+  }
+]

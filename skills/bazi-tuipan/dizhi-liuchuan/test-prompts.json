@@ -1,0 +1,42 @@
+[
+  {
+    "id": "dch-001",
+    "prompt": "子未穿为什么破坏力重？",
+    "expected_skill": "dizhi-liuchuan",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问六穿分类"
+  },
+  {
+    "id": "dch-002",
+    "prompt": "穿忌神为什么是好事？",
+    "expected_skill": "dizhi-liuchuan",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问六穿铁律"
+  },
+  {
+    "id": "dch-003",
+    "prompt": "生中带穿和相克穿有什么区别？",
+    "expected_skill": "dizhi-liuchuan",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问六穿分类"
+  },
+  {
+    "id": "dch-004",
+    "prompt": "冲可以调解穿吗？",
+    "expected_skill": "dizhi-liuchuan",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问冲穿关系"
+  },
+  {
+    "id": "dch-005",
+    "prompt": "六穿和六冲哪个更凶？",
+    "expected_skill": "dizhi-liuchuan",
+    "should_fire": false,
+    "category": "诱饵-边界模糊",
+    "note": "需要具体八字背景"
+  }
+]

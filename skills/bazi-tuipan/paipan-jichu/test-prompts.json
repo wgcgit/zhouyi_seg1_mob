@@ -1,0 +1,50 @@
+[
+  {
+    "id": "ppj-001",
+    "prompt": "排出1990年8月15日中午12点出生的八字",
+    "expected_skill": "paipan-jichu",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "明确要求排八字"
+  },
+  {
+    "id": "ppj-002",
+    "prompt": "阳历1987年12月6号晚上6:30出生，怎么排四柱？",
+    "expected_skill": "paipan-jichu",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "要求排盘"
+  },
+  {
+    "id": "ppj-003",
+    "prompt": "这个八字的日干是什么？",
+    "expected_skill": "paipan-jichu",
+    "should_fire": false,
+    "category": "诱饵-边界模糊",
+    "note": "没有提供具体八字，无法触发"
+  },
+  {
+    "id": "ppj-004",
+    "prompt": "什么是五虎遁？",
+    "expected_skill": "paipan-jichu",
+    "should_fire": false,
+    "category": "诱饵-应触发同书另一skill",
+    "note": "五虎遁是排月干的工具，但问题本身是概念问答"
+  },
+  {
+    "id": "ppj-005",
+    "prompt": "庚申年 戊子月 癸未日，庚申时，这个八字的藏干是什么？",
+    "expected_skill": "paipan-jichu",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "用户提供完整八字，问藏干"
+  },
+  {
+    "id": "ppj-006",
+    "prompt": "帮我算一下卯月是农历几月？",
+    "expected_skill": "paipan-jichu",
+    "should_fire": false,
+    "category": "诱饵-不应触发",
+    "note": "这不是完整排盘请求"
+  }
+]

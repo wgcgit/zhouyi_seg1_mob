@@ -1,0 +1,42 @@
+[
+  {
+    "id": "dlh-001",
+    "prompt": "子丑合化为什么是土？",
+    "expected_skill": "dizhi-liuhe",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问六合具体组合"
+  },
+  {
+    "id": "dlh-002",
+    "prompt": "生合和克合有什么区别？",
+    "expected_skill": "dizhi-liuhe",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问六合基本概念"
+  },
+  {
+    "id": "dlh-003",
+    "prompt": "原局有寅亥合，是生合还是克合？",
+    "expected_skill": "dizhi-liuhe",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "判断六合类型"
+  },
+  {
+    "id": "dlh-004",
+    "prompt": "寅亥合化成功需要什么条件？",
+    "expected_skill": "dizhi-liuhe",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问合化条件"
+  },
+  {
+    "id": "dlh-005",
+    "prompt": "地支六冲和六合哪个力量更大？",
+    "expected_skill": "dizhi-liuhe",
+    "should_fire": false,
+    "category": "诱饵-边界模糊",
+    "note": "涉及多个地支关系"
+  }
+]

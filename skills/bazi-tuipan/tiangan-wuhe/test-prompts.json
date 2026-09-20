@@ -1,0 +1,50 @@
+[
+  {
+    "id": "tgw-001",
+    "prompt": "甲己合代表什么意思？",
+    "expected_skill": "tiangan-wuhe",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问具体天干五合"
+  },
+  {
+    "id": "tgw-002",
+    "prompt": "天干五合中哪一组最吉利？",
+    "expected_skill": "tiangan-wuhe",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问天干五合总论"
+  },
+  {
+    "id": "tgw-003",
+    "prompt": "原局有甲己合，论合化还是合绊？",
+    "expected_skill": "tiangan-wuhe",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问合的状态判断"
+  },
+  {
+    "id": "tgw-004",
+    "prompt": "甲木日主见己土是正财还是偏财？",
+    "expected_skill": "shishen-jichu",
+    "should_fire": false,
+    "category": "诱饵-应触发另一skill",
+    "note": "这是十神定义问题"
+  },
+  {
+    "id": "tgw-005",
+    "prompt": "合来和合去有什么区别？",
+    "expected_skill": "tiangan-wuhe",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "问五合状态"
+  },
+  {
+    "id": "tgw-006",
+    "prompt": "我八字里没有天干五合，还需要分析这个吗？",
+    "expected_skill": "tiangan-wuhe",
+    "should_fire": true,
+    "category": "应触发",
+    "note": "确认是否需要分析五合"
+  }
+]
